@@ -2,15 +2,18 @@ $(document).ready(function(){
 
   var btn = $('#submit-input').button();
   btn.click(function(){
-    parseInput();
+    parseInput($('#input-graph').val());
   });
 
 });
 
-function parseInput() {
+function generateOutput() {
+  
+}
+
+function parseInput(inputGraph) {
   var regexpForEdges = /. -> .( \[label=".*\])?/g;
   var regexpForNodes = /. \[label=".*\]?/g;
-  var inputGraph = $('#input-graph').val();
   var graphEdges = inputGraph.match(regexpForEdges);
   var nodes = [];
   var edges = [];
@@ -60,7 +63,7 @@ function draw(basicData) {
   var options = {
     "edges": {
       "smooth": {
-        "type": "continuous",
+        "type": "straightCross",
         "forceDirection": "none"
       }
     },
