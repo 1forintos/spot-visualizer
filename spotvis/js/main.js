@@ -1,14 +1,39 @@
 $(document).ready(function(){
 
-  var btn = $('#submit-input').button();
-  btn.click(function(){
-    parseInput($('#input-graph').val());
+  var btnSubmitStatement = $('#submit-statement').button();
+  btnSubmitStatement.click(function(){
+    submitStatement($('#input-statement').val());
   });
 
+  var btnSubmitGraph = $('#submit-graph').button();
+  btnSubmitGraph.click(function(){
+    parseInput($('#input-graph').val());
+  });
 });
 
+function submitStatement(statement) {
+  $.ajax({
+    type: "POST",
+    url: "php/script.php",
+    data: {
+      query: statement
+    },
+    success: function(result) {
+      alert(result);
+    }
+  });
+}
+
 function generateOutput() {
-  
+  var edges = network.edgesHandler.body.edges;
+  var nodes = network.nodesHandler.body.nodes;
+  for(var i in edges) {
+    console.log(edges[i]);
+  }
+
+  for(var i in nodes) {
+    console.log(nodes[i]);
+  }
 }
 
 function parseInput(inputGraph) {

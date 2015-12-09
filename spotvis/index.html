@@ -24,9 +24,33 @@
   <input type="button" value="save" id="saveButton" />
   <input type="button" value="cancel" id="cancelButton" />
 </div>
-<br />
-	<div id="mynetwork"></div>
-	<textarea id="input-graph" rows="4" cols="50"></textarea>
-	<button id="submit-input">Submit</button>
+<br/>
+	<table>
+		<tr>
+			<td colspan="2">
+				<div id="mynetwork"></div>
+			</td>
+		</tr>
+		<tr>
+			<th>Statement</th>
+			<th>Graph</th>
+		</tr>
+		<tr>
+			<td>
+				<textarea id="input-statement" rows="4" cols="50"></textarea>
+			</td>
+			<td>
+				<textarea id="input-graph" rows="4" cols="50"></textarea>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<button id="submit-statement">Submit</button>
+			</td>
+			<td>
+				<button id="submit-graph">Submit</button>
+			</td>
+		</tr>
+	</table>
 </body>
 </html>
