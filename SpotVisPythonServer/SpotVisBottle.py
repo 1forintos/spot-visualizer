@@ -1,10 +1,26 @@
 #!/usr/bin/env python
-from bottle import run, post, request
+from bottle import run, post, request, get
 import spot
 
 @post('/spotvis')
 def get_automaton():
-    output = spot.formula(request.forms.get('query')).translate('BA').to_str('spin')
+    input = request.forms.get('query')
+    spot.setup()
+    f = spot.formula(input)
+    a = f.translate('tgba')
+    output = a.to_str('dot')
     return output
+
+@get('/test')
+def test():
+    input = '(Ga -> Gb) W c'
+    spot.setup()
+    f = spot.formula(input)
+    a = f.translate('tgba')
+    output = a.to_str('dot')
+    return output
+
+
+
 
 run(host='localhost', port=8080, debug=True)
