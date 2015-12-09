@@ -1,0 +1,14 @@
+specification result {
+	statechart receiverMonitor := {
+		region main {
+			state 0
+			state 1
+			initial I
+
+			transition from I to 1
+			transition from 0 to 0
+			transition from 1 to 0
+			transition from 1 to 1
+		}
+	}
+}

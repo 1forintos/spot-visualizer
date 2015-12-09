@@ -9,6 +9,11 @@ $(document).ready(function(){
   btnSubmitGraph.click(function(){
     parseInput($('#input-graph').val());
   });
+
+  var btnGenOutput = $('#generate-output').button();
+  btnGenOutput.click(function(){
+    generateOutput();
+  });
 });
 
 function submitStatement(statement) {
@@ -28,13 +33,35 @@ function submitStatement(statement) {
 function generateOutput() {
   var edges = network.edgesHandler.body.edges;
   var nodes = network.nodesHandler.body.nodes;
-  for(var i in edges) {
-    console.log(edges[i]);
-  }
+  
+  var output = 
+"specification result {\n\tstatechart receiverMonitor := {\n\t\tregion main {\n";
 
   for(var i in nodes) {
-    console.log(nodes[i]);
+    if(nodes[i].id == "I") {
+      output += "\t\t\tinitial I\n";
+    } else {
+      output += "\t\t\tstate " + nodes[i].id +"\n";
+    }
   }
+  output += "\n";
+  for(var i in edges) {
+    output += "\t\t\ttransition from " + edges[i].from.id + " to " + edges[i].to.id + "\n";
+  }
+
+  output += "\t\t}\n\t}\n}";
+  $.ajax({
+    type: "POST",
+    url: "php/saveOutput.php",
+    data: {
+      output: output
+    },
+    success: function(result) {
+      if(result == "success") {
+        window.open("php/download.php");
+      }
+    }
+  });
 }
 
 function parseInput(inputGraph) {
@@ -58,6 +85,7 @@ function parseInput(inputGraph) {
     edges.push({from: from, to: to, arrows: 'to', label: edgeLabel});
   }
   var graphNodes = inputGraph.match(regexpForNodes);
+  nodes.push({id: "I", label: "Init"});
   for(var i in graphNodes) {
     inputGraph = inputGraph.replace(graphNodes[i], "");
     var label = graphNodes[i].match(/. /).shift().trim();
