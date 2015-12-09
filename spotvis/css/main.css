@@ -30,14 +30,15 @@ div.table_description {
   width:100px;
 }
 
-#operation {
-  font-size:28px;
+#operation, #newTransaction-label {
+  font-size:24px;
 }
-#network-popUp {
+
+#network-popUp, #addEdge-popUp {
   display:none;
   position:absolute;
-  top:350px;
-  left:170px;
+  top:270px;
+  left:280px;
   z-index:299;
   width:250px;
   height:120px;

@@ -15,8 +15,8 @@
 <body>
 <div id="network-popUp">
 	<span id="operation">node</span> <br>
-	<table style="margin:auto;">
-	  	<tr>
+	<table style="margin:auto; margin-top: 20px;">
+	  	<tr style="display: none;">
 		    <td>id</td>
 		    <td><span id="node-id" value=""/></td>
 	  	</tr>
@@ -27,6 +27,17 @@
 	</table>
 	<input type="button" value="save" id="saveButton"/>
 	<input type="button" value="cancel" id="cancelButton"/>
+</div>
+<div id="addEdge-popUp">
+	<span id="newTransaction-label">New Transaction</span> <br>
+	<table style="margin:auto; margin-top: 20px;">
+	    <tr>
+	      <td>Condition</td>
+	      <td><input id="transaction-condition" value="condition"/></td>
+	    </tr>
+	</table>
+	<input type="button" value="save" id="saveEdgeButton"/>
+	<input type="button" value="cancel" id="cancelEdgeButton"/>
 </div>
 <br/>
 	<table>

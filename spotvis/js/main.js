@@ -132,23 +132,10 @@ function draw(basicData) {
         document.getElementById('cancelButton').onclick = cancelEdit.bind(this,callback);
         document.getElementById('network-popUp').style.display = 'block';
       },
-      addEdge: function (data, callback) {
-        // filling in the popup DOM elements
-        document.getElementById('operation').innerHTML = "Add Edge";
-        document.getElementById('node-id').value = data.id;
-        document.getElementById('node-label').value = data.label;
-        document.getElementById('saveButton').onclick = saveEdge.bind(this, data, callback);
-        document.getElementById('cancelButton').onclick = cancelEdit.bind(this,callback);
-        document.getElementById('network-popUp').style.display = 'block';
-        if (data.from == data.to) {
-          var r = confirm("Do you want to connect the node to itself?");
-          if (r == true) {
-            callback(data);
-          }
-        }
-        else {
-          callback(data);
-        }
+      addEdge: function (data, callback) {      
+        document.getElementById('saveEdgeButton').onclick = saveEdgeData.bind(this, data, callback);
+        document.getElementById('cancelEdgeButton').onclick = cancelEdgeEdit.bind(this,callback);
+        document.getElementById('addEdge-popUp').style.display = "block";  
       }
     }
   };
@@ -161,8 +148,20 @@ function clearPopUp() {
   document.getElementById('network-popUp').style.display = 'none';
 }
 
+function clearEdgePopUp() {
+  document.getElementById('saveEdgeButton').onclick = null;
+  document.getElementById('cancelEdgeButton').onclick = null;
+  document.getElementById('addEdge-popUp').style.display = 'none';
+}
+
 function cancelEdit(callback) {
   clearPopUp();
+  callback(null);
+}
+
+
+function cancelEdgeEdit(callback) {
+  clearEdgePopUp();
   callback(null);
 }
 
@@ -170,5 +169,18 @@ function saveData(data,callback) {
   data.id = document.getElementById('node-id').value;
   data.label = document.getElementById('node-label').value;
   clearPopUp();
+  callback(data);
+}
+
+function saveEdgeData(data, callback) {
+  if (data.from == data.to) {
+    var r = confirm("Do you want to connect the node to itself?");
+    if (r != true) {
+      return;
+    }
+  }
+  data.label = document.getElementById('transaction-condition').value;
+  data.arrows = "to";
+  clearEdgePopUp();
   callback(data);
 }
