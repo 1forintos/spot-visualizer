@@ -19,7 +19,8 @@ function submitStatement(statement) {
       query: statement
     },
     success: function(result) {
-      alert(result);
+      console.log(result);
+      parseInput(result);
     }
   });
 }
@@ -82,7 +83,7 @@ function draw(basicData) {
   var seed = 2;
   destroy();  
   var networkData = {nodes: nodes, edges: edges};
-  console.log(networkData);
+
   // create a network
   var container = document.getElementById('mynetwork');
   var options = {
@@ -121,6 +122,13 @@ function draw(basicData) {
         document.getElementById('network-popUp').style.display = 'block';
       },
       addEdge: function (data, callback) {
+        // filling in the popup DOM elements
+        document.getElementById('operation').innerHTML = "Add Edge";
+        document.getElementById('node-id').value = data.id;
+        document.getElementById('node-label').value = data.label;
+        document.getElementById('saveButton').onclick = saveEdge.bind(this, data, callback);
+        document.getElementById('cancelButton').onclick = cancelEdit.bind(this,callback);
+        document.getElementById('network-popUp').style.display = 'block';
         if (data.from == data.to) {
           var r = confirm("Do you want to connect the node to itself?");
           if (r == true) {
