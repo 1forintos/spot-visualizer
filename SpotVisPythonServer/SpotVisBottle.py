@@ -7,7 +7,7 @@ def get_automaton():
     input = request.forms.get('query')
     spot.setup()
     f = spot.formula(input)
-    a = f.translate('tgba')
+    a = f.translate('monitor')
     output = a.to_str('dot')
     return output
 
