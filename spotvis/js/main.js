@@ -38,6 +38,7 @@ function generateOutput() {
 }
 
 function parseInput(inputGraph) {
+  inputGraph = fixLogicaleOperands(inputGraph);
   var regexpForEdges = /. -> .( \[label=<.*\])?/g;
   var regexpForNodes = /. \[label=<.*\]?/g;
   var graphEdges = inputGraph.match(regexpForEdges);
@@ -63,6 +64,16 @@ function parseInput(inputGraph) {
     nodes.push({id: label, label:  label});
   }  
   draw({nodes: nodes, edges: edges});
+}
+
+function fixLogicaleOperands(input) {
+  var replacements = [
+    {from: "&amp;", to: "&"}
+  ];
+  for(var i in replacements) {
+    input = input.replace(replacements[i].from, replacements[i].to);
+  }
+  return input;
 }
 
 function destroy() {
