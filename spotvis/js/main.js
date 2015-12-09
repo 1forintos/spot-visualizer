@@ -37,8 +37,8 @@ function generateOutput() {
 }
 
 function parseInput(inputGraph) {
-  var regexpForEdges = /. -> .( \[label=".*\])?/g;
-  var regexpForNodes = /. \[label=".*\]?/g;
+  var regexpForEdges = /. -> .( \[label=<.*\])?/g;
+  var regexpForNodes = /. \[label=<.*\]?/g;
   var graphEdges = inputGraph.match(regexpForEdges);
   var nodes = [];
   var edges = [];
@@ -47,10 +47,10 @@ function parseInput(inputGraph) {
     var from = graphEdges[i].match(/. /).shift().trim();
     var to = graphEdges[i].match(/-> ./).shift().substr(3);
     //var edgeLabel = graphEdges[i].match(/\[label=".*"/).shift().substr(6, -1);
-    var labelText = graphEdges[i].match(/label=".*"/);
+    var labelText = graphEdges[i].match(/label=<.*>/);
     var edgeLabel = "";
     if(labelText != null) {
-      var tmp = graphEdges[i].match(/label=".*"/).shift();
+      var tmp = graphEdges[i].match(/label=<.*>/).shift();
       edgeLabel = tmp.substring(7, tmp.length - 1);
     }
     edges.push({from: from, to: to, arrows: 'to', label: edgeLabel});
