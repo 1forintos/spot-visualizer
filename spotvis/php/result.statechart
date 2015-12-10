@@ -4,16 +4,12 @@ specification result {
 			state 0
 			state 1
 			state 2
-			state 3
-			state 4
 			initial I
 
-			transition from I to 4
-			transition from 0 to 0
-			transition from 1 to 0
-			transition from 2 to 1
-			transition from 3 to 2
-			transition from 4 to 3
+			transition from I to 2 on 
+			transition from 0 to 0 on 1
+			transition from 1 to 0 on mon
+			transition from 2 to 1 on reg
 		}
 	}
 }

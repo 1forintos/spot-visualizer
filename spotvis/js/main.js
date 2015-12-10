@@ -46,7 +46,7 @@ function generateOutput() {
   }
   output += "\n";
   for(var i in edges) {
-    output += "\t\t\ttransition from " + edges[i].from.id + " to " + edges[i].to.id + "\n";
+    output += "\t\t\ttransition from " + edges[i].from.id + " to " + edges[i].to.id + " on " + edges[i].options.label + "\n";
   }
 
   output += "\t\t}\n\t}\n}";
@@ -194,7 +194,7 @@ function cancelEdgeEdit(callback) {
 }
 
 function saveData(data,callback) {
-  data.id = document.getElementById('node-id').value;
+  data.id = document.getElementById('node-label').value;
   data.label = document.getElementById('node-label').value;
   clearPopUp();
   callback(data);
