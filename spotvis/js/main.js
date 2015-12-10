@@ -96,7 +96,7 @@ function parseInput(inputGraph) {
 
 function fixLogicaleOperands(input) {
   var replacements = [
-    {from: "&amp;", to: "&"}
+    {from: new RegExp("&amp;", "g"), to: "&"}
   ];
   for(var i in replacements) {
     input = input.replace(replacements[i].from, replacements[i].to);
